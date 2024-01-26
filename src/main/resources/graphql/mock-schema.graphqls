@@ -1,0 +1,10 @@
+type Query {
+    arkiv: [ArkivPost]
+}
+
+type ArkivPost {
+    brukerId: ID!
+    name: String
+    dato: String
+    status: Boolean
+}
