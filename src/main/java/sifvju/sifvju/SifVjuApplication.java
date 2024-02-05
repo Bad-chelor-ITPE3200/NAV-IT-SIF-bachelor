@@ -17,7 +17,7 @@ public class SifVjuApplication {
     public static void main(String[] args) {
         SpringApplication.run(SifVjuApplication.class, args);
     }
-
+    //
     @PostConstruct
     public void startWireMockServer() {
         wireMockServer = new WireMockServer(8081); // or any other port you wish to use
