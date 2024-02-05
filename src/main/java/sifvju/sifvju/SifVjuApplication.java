@@ -46,6 +46,8 @@ public class SifVjuApplication {
         System.out.println(response);
 
         */
+
+
         String requestJson = "{\"query\": \"query {  journalpost(journalpostId: \\\"453857319\\\")" +
                 " {    journalposttype    journalstatus   tema    tittel    journalstatus    dokumenter" +
                 " {      dokumentInfoId      tittel    }    avsenderMottaker {      navn    }  }}\"}";
@@ -68,11 +70,16 @@ public class SifVjuApplication {
         HttpHeaders headers = new HttpHeaders();
         // setContentType() specifies that the request body contains JSON data. Aka this sets the content-type header
         headers.setContentType(MediaType.APPLICATION_JSON);
-        // Below sets the accept header, which informs what response the client is willing to accept, which is JSON
+        // Below sets the acceptheader, which informs what response the client is willing to accept, which is JSON.
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 
+        /* The HttpEntity class in Spring represents an HTTP request or response entity consisting of a header and
+           a body. In the case of below, it is representing an HTTP request and is an HttpEntity object with a
+           JSON GraphQL query as the body (requestJson object) and the custom headers I set up earlier.  */
         HttpEntity<String> entity = new HttpEntity<>(requestJson, headers);
-
+        /* uses the REST template to execute a post request. The arguments are the url we want to get a response from
+           entity is the HttpEntity String object with the request body and the headers and String.class means that
+           we expect Spring to convert the HTTP response body to a String. */
         ResponseEntity<String> response = restTemplate.postForEntity(url, entity, String.class);
 
         System.out.println(response.getBody());
