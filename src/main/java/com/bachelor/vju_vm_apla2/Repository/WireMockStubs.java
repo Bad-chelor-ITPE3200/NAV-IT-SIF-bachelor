@@ -205,7 +205,76 @@ public class WireMockStubs {
                                 "}")));
 
 
+    // WireMock stub with an expanded request body along with a response with fraDato and tilDato
+        wireMockServer.stubFor(post(urlEqualTo("/mock/graphql"))
+            .withRequestBody(equalToJson("{\n" +
+            "  \"brukerId\": {\n" +
+            "    \"id\": \"020199883344\",\n" +
+            "    \"type\": \"FNR\"\n" +
+            "  },\n" +
+            "  \"fraDato\": \"2020-01-01\",\n" +
+            "  \"tilDato\": \"2021-01-01\",\n" +
+            "  \"journalposttyper\": [\"I\"],\n" +
+            "  \"journalstatuser\": [\"FERDIGSTILT\"],\n" +
+            "  \"tema\": [\"SYM\"]\n" +
+            "}", true, true))
+            .withHeader("Authorization", containing("Bearer"))
+            .willReturn(aResponse()
+                .withHeader("Access-Control-Allow-Origin", "*") // Allow requests from all origins
+                        .withHeader("Content-Type", "application/json") // Set the correct Content-Type for the response
+                        .withStatus(200) // Return HTTP 200 OK
+                        .withBody("{\n" +
+                                          "   \"data\":{\n" +
+                                          "      \"dokumentoversiktBruker\":{\n" +
+                                          "         \"journalposter\":[\n" +
+                                          "            {\n" +
+                                          "               \"journalpostId\":\"429111291\",\n" +
+                                          "               \"tittel\":\"Svak Postkasse\",\n" +
+                                          "               \"journalposttype\":\"I\",\n" +
+                                          "               \"journalstatus\":\"FERDIGSTILT\",\n" +
+                                          "               \"tema\":\"SYM\",\n" +
+                                          "               \"datoOpprettet\":\"2020-05-20\",\n" +
+                                          "               \"dokumenter\":[\n" +
+                                          "                  {\n" +
+                                          "                     \"dokumentInfoId\":\"00001111\",\n" +
+                                          "                     \"tittel\":\"MASKERT_FELT\"\n" +
+                                          "                  }\n" +
+                                          "               ]\n" +
+                                          "            },\n" +
+                                          "            {\n" +
+                                          "               \"journalpostId\":\"429108246\",\n" +
+                                          "               \"tittel\":\"Rusten Veikryss\",\n" +
+                                          "               \"journalposttype\":\"I\",\n" +
+                                          "               \"journalstatus\":\"FERDIGSTILT\",\n" +
+                                          "               \"tema\":\"SYM\",\n" +
+                                          "               \"datoOpprettet\":\"2020-07-15\",\n" +
+                                          "               \"dokumenter\":[\n" +
+                                          "                  {\n" +
+                                          "                     \"dokumentInfoId\":\"00002222\",\n" +
+                                          "                     \"tittel\":\"MASKERT_FELT\"\n" +
+                                          "                  }\n" +
+                                          "               ]\n" +
+                                          "            },\n" +
+                                          "            {\n" +
+                                          "               \"journalpostId\":\"429101111\",\n" +
+                                          "               \"tittel\":\"Heisann sveisann\",\n" +
+                                          "               \"journalposttype\":\"I\",\n" +
+                                          "               \"journalstatus\":\"FERDIGSTILT\",\n" +
+                                          "               \"tema\":\"SYM\",\n" +
+                                          "               \"datoOpprettet\":\"2021-01-01\",\n" +
+                                          "               \"dokumenter\":[\n" +
+                                          "                  {\n" +
+                                          "                     \"dokumentInfoId\":\"00003333\",\n" +
+                                          "                     \"tittel\":\"MASKERT_FELT\"\n" +
+                                          "                  }\n" +
+                                          "               ]\n" +
+                                          "            }\n" +
+                                          "         ]\n" +
+                                          "      }\n" +
+                                          "   }\n" +
+                                          "}")));
     }
+
 
     @PreDestroy
     public void stopWireMockServer() {
