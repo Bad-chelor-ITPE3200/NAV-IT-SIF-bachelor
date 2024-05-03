@@ -1,9 +1,11 @@
 package com.bachelor.vju_vm_apla2.Controller;
 
 import com.bachelor.vju_vm_apla2.Models.DTO.DokArkiv.CreateJournalpost_DTO;
+import com.bachelor.vju_vm_apla2.Models.DTO.DokArkiv.OppdaterJournalpost_DTO;
 import com.bachelor.vju_vm_apla2.Models.DTO.DokArkiv.ResponeReturnFromDokArkiv_DTO;
 import com.bachelor.vju_vm_apla2.Service.DokArkiv_Service.FeilRegistrer_DELETE;
 import com.bachelor.vju_vm_apla2.Service.DokArkiv_Service.OpprettNyeJournalposter_CREATE;
+import com.bachelor.vju_vm_apla2.Service.DokArkiv_Service.SplittingAvJournalposter_UPDATE;
 import lombok.Getter;
 import no.nav.security.token.support.core.api.Protected;
 import no.nav.security.token.support.core.api.Unprotected;
@@ -24,13 +26,15 @@ public class DokArkivController {
 
     private static final Logger logger = LogManager.getLogger(DokArkivController.class);
 
+    private final SplittingAvJournalposter_UPDATE oppdaterJournalposter;
     private final OpprettNyeJournalposter_CREATE opprettNyeJournalposterCREATE;
     private final FeilRegistrer_DELETE feilRegistrerService;
 
     @Autowired
-    public DokArkivController(OpprettNyeJournalposter_CREATE opprettNyeJournalposterCREATE, FeilRegistrer_DELETE feilRegistrerService){
+    public DokArkivController(OpprettNyeJournalposter_CREATE opprettNyeJournalposterCREATE, FeilRegistrer_DELETE feilRegistrerService, SplittingAvJournalposter_UPDATE oppdaterJournalposter){
         this.opprettNyeJournalposterCREATE = opprettNyeJournalposterCREATE;
         this.feilRegistrerService = feilRegistrerService;
+        this.oppdaterJournalposter = oppdaterJournalposter;
     }
 
 
@@ -73,8 +77,6 @@ public class DokArkivController {
     @GetMapping("/feilregistrer")
     public Mono<ResponseEntity<Boolean>> feilregistrer(@RequestParam("journalpostId") String journalpostId, @RequestParam("type") String type, @RequestHeader HttpHeaders headers){
         return feilRegistrerService.feilRegistrer(journalpostId, type, headers)
-
-
                 .onErrorResume(e -> {
                     // Handle any errors that occur during the service call
                     logger.error("Feil ved lagring av nye journalposter: {}", e.getMessage());
@@ -82,19 +84,19 @@ public class DokArkivController {
                 })
                 .doOnSuccess(response -> logger.info("Response sent to client: {}", response.getStatusCode()));
     }
-    /*
-    @RequestMapping("/dokarkivAPI")
+
     @CrossOrigin
-    @PostMapping("/alpha_createJournalpost")
-    public Mono<ResponseEntity<ControllerReponse_DTO[]>> createJournalpost(@RequestBody CreateJournalpost_DTO meta, @RequestHeader HttpHeaders header){
-
-        logger.info("Inne i metoden hentJournalpostListe med data: {}", meta);
-
-        //denne skal returnere
-        return null;
+    @PostMapping("/oppdaterJournalpost")
+    public Mono<ResponseEntity<Boolean>> oppdaterJournalpost(@RequestBody OppdaterJournalpost_DTO meta, @RequestHeader HttpHeaders headers){
+        System.out.println("YAY!");
+        return oppdaterJournalposter.oppdaterMottattDato(meta, headers)
+                .onErrorResume(e -> {
+                    // Handle any errors that occur during the service call
+                    logger.error("Feil ved oppdatering av Journalpost: {}", e.getMessage());
+                    return Mono.just(ResponseEntity.internalServerError().body(false));  // Provide an empty list on error
+                })
+                .doOnSuccess(response -> logger.info("Response sent to client: {}", response.getStatusCode()));
     }
-
-     */
 
 
 }

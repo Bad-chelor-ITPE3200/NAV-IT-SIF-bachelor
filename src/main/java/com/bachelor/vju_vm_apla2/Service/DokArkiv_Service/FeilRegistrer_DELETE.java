@@ -49,7 +49,7 @@ public class FeilRegistrer_DELETE {
         System.out.println("Service - feilregistrer: vi skal nå inn i wiremock med forespørsel: ");
         System.out.println("Original headers:");
 
-        return this.webClient.delete()
+        return this.webClient.patch()
                 .uri(url + endpoint)
                 .header(HttpHeaders.AUTHORIZATION, originalHeader.getFirst(HttpHeaders.AUTHORIZATION))
                 //.headers(headers -> headers.addAll(headersForRequest))
