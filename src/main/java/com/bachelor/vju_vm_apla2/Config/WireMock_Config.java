@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Primary;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options;
 
 @Configuration
-public class Saf_MockConfig {
+public class WireMock_Config {
 
     //setter opp wiremock server og enabler logging
     /* @Beans means that the Spring IOC, which manages specific instances or objects, should handle the method
@@ -32,7 +32,7 @@ public class Saf_MockConfig {
         return new WireMockServer(options()
                 .bindAddress(saf_url)
                 .port(saf_port)
-                .extensions(new StubResponsConfig())
+                .extensions(new StubRespons_Config())
                 /* Below is the classpath which is "." meaning current classpath root, where WireMock will look
                    for files such as stubs. */
                 .usingFilesUnderClasspath(".") //change this one for not in use with docker
