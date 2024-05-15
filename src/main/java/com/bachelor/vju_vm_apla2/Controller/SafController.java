@@ -1,6 +1,6 @@
 package com.bachelor.vju_vm_apla2.Controller;
 
-import com.bachelor.vju_vm_apla2.Models.DTO.Request.PostJournalpostList_DTO;
+import com.bachelor.vju_vm_apla2.Models.DTO.Request.SokJournalpostList_DTO;
 import com.bachelor.vju_vm_apla2.Models.DTO.Saf.ReturnFromGraphQl_DTO;
 import com.bachelor.vju_vm_apla2.Service.Saf_Service.SafService;
 import com.bachelor.vju_vm_apla2.ErrorHandling.ErrorHandling;
@@ -37,7 +37,7 @@ public class SafController {
 
     @CrossOrigin
     @PostMapping("/hentJournalpostListe")
-    public Mono<ResponseEntity<ReturnFromGraphQl_DTO>> hentJournalpostListe(@RequestBody PostJournalpostList_DTO query, @RequestHeader HttpHeaders headers) {
+    public Mono<ResponseEntity<ReturnFromGraphQl_DTO>> hentJournalpostListe(@RequestBody SokJournalpostList_DTO query, @RequestHeader HttpHeaders headers) {
         logger.info("Inne i metoden hentJournalpostListe med data: {}", query);
         return safService.hentJournalpostListe_Test_ENVIRONMENT(query, headers)
                 .map(response -> {

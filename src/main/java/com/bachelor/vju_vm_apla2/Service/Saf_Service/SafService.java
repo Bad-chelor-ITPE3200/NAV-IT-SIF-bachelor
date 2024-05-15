@@ -1,7 +1,7 @@
 package com.bachelor.vju_vm_apla2.Service.Saf_Service;
 
 import com.bachelor.vju_vm_apla2.ErrorHandling.CustomClientException;
-import com.bachelor.vju_vm_apla2.Models.DTO.Request.PostJournalpostList_DTO;
+import com.bachelor.vju_vm_apla2.Models.DTO.Request.SokJournalpostList_DTO;
 import com.bachelor.vju_vm_apla2.Models.DTO.Saf.ReturnFromGraphQl_DTO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -52,7 +52,7 @@ public class SafService {
      * @param originalHeader HttpHeaders som inkluderer nødvendige autentiseringsinformasjon og andre headere.
      * @return Mono<ReturnFromGraphQl_DTO> som inneholder resultatet av forespørselen, pakket som et ReturnFromGraphQl_DTO objekt.
      */
-    public Mono<ReturnFromGraphQl_DTO> hentJournalpostListe(PostJournalpostList_DTO query, HttpHeaders originalHeader) {
+    public Mono<ReturnFromGraphQl_DTO> hentJournalpostListe(SokJournalpostList_DTO query, HttpHeaders originalHeader) {
         String graphQLQuery = createGraphQLQuery(query);
         logger.info("Starter henting av journalposter med forespørsel: {}", graphQLQuery);
 
@@ -80,7 +80,7 @@ public class SafService {
                 });
     }
 
-    public Mono<ReturnFromGraphQl_DTO> hentJournalpostListe_Test_ENVIRONMENT(PostJournalpostList_DTO query, HttpHeaders headers) {
+    public Mono<ReturnFromGraphQl_DTO> hentJournalpostListe_Test_ENVIRONMENT(SokJournalpostList_DTO query, HttpHeaders headers) {
         return webClient.post()
                 .uri(url+"/graphql")
                 .headers(h -> h.addAll(headers))
@@ -112,7 +112,7 @@ public class SafService {
      * @param query Objekt som inneholder søkekriteriene fra klienten.
      * @return En streng som representerer den komplette GraphQL-forespørselen.
      */
-    private String createGraphQLQuery(PostJournalpostList_DTO query) {
+    private String createGraphQLQuery(SokJournalpostList_DTO query) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String formattedFraDato = query.getFraDato() != null ? LocalDate.ofInstant(Instant.parse(query.getFraDato()), ZoneId.systemDefault()).format(formatter) : "null";
         String formattedTilDato = query.getTilDato() != null ? LocalDate.ofInstant(Instant.parse(query.getTilDato()), ZoneId.systemDefault()).format(formatter) : "null";

@@ -1,4 +1,4 @@
-package com.bachelor.vju_vm_apla2.Repository;
+package com.bachelor.vju_vm_apla2.Wiremock;
 
 public class WireMockResponseList {
 

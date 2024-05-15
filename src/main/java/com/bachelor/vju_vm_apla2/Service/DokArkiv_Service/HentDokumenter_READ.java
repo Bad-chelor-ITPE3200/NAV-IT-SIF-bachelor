@@ -36,31 +36,7 @@ public class HentDokumenter_READ {
                 .build();
     }
 
-    //TODO: SKAL DET VÆRE TOKEN I HEADER?
 
-
-    /**
-     * Retrieves a document based on its ID and the journal post ID, converts the document data into a Base64 string.
-     * This method performs an HTTP GET request to an external service and handles various response scenarios including
-     * successful data retrieval and different types of errors.
-     *
-     * Steps:
-     * 1. Build the endpoint URL using the document and journal post IDs.
-     * 2. Send an HTTP GET request to the constructed URL.
-     * 3. Handle HTTP status errors by logging them and throwing a CustomClientException with detailed error information.
-     * 4. If the response is successful, convert the received byte array (document data) into a Base64 string to standardize
-     *    the format for further processing or storage.
-     * 5. Log and manage unexpected errors using a generic error message, and continue the flow by providing a fallback
-     *    error message encoded in Base64.
-     *
-     * The method uses reactive programming principles to handle asynchronous HTTP calls and error handling,
-     * ensuring that all operations are non-blocking and efficiently managed.
-     *
-     * @param dokumentInfoId The ID of the document to retrieve.
-     * @param journalpostId The ID of the journal post associated with the document.
-     * @return Mono<String> A reactive Mono that emits the Base64-encoded string of the document if retrieval is successful,
-     *         or errors out with appropriate exceptions if issues occur during the process.
-     */
     public Mono<String> hentDokument_DokArkiv(String dokumentInfoId, String journalpostId) {
 
         logger.info("INFO: HentDokument_READ - hentDokument_DokArkiv - med denne meta" + dokumentInfoId + "og " + journalpostId);

@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class PostJournalpostList_DTO {
+public class SokJournalpostList_DTO {
 
     private BrukerIdInput brukerId;
     private String fraDato;
