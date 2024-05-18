@@ -14,4 +14,4 @@ LABEL authors="JAGO industries"
 COPY  src/main/resources/__files /__files
 COPY  --from=BUILD target/*.jar /sif-vju-backend.jar
 
-ENTRYPOINT ["java", "-jar","/vju/sif-vju-backend.jar"]
+ENTRYPOINT ["java", "-jar","/sif-vju-backend.jar"]
