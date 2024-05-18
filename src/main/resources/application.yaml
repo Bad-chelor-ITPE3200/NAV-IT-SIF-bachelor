@@ -32,6 +32,7 @@ FRONTEND:
   COMBINED: http://${FRONTEND.URL}:${FRONTEND.PORT}
   URL: localhost
   PORT: 3000
+
 mock-oauth2-server:
   url: mock-oauth2-server
   port: 8282

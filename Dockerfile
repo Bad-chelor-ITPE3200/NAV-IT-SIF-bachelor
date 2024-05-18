@@ -8,10 +8,10 @@ LABEL authors="JAGO industries"
 #CMD ["mvn spring-boot:build-image"]
 #COPY /.mvn/maven-wrapper.jar maven-wrapper.jar
 #COPY mvnw.cmd mvnw.cmd
-WORKDIR vju
+
 
 #Can also be commended out for a real db
-COPY  src/main/resources/__files /vju/resources/__files
-COPY  --from=BUILD target/*.jar /vju/sif-vju-backend.jar
+COPY  src/main/resources/__files /__files
+COPY  --from=BUILD target/*.jar /sif-vju-backend.jar
 
 ENTRYPOINT ["java", "-jar","/vju/sif-vju-backend.jar"]
