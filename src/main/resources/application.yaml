@@ -32,6 +32,12 @@ FRONTEND:
   COMBINED: http://${FRONTEND.URL}:${FRONTEND.PORT}
   URL: localhost
   PORT: 3000
+mock-oauth2-server:
+  url: mock-oauth2-server
+  port: 8282
+  combined: https://bachelor.kinde.com
+  token-url: ${mock-oauth2-server.combined}/default/token
+
 
 wiremock-saf:
   url: localhost
