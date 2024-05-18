@@ -1,11 +1,11 @@
-package com.bachelor.vju_vm_apla2;
+package com.bachelor.vju_vm_apla2.Wiremock;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
-import static com.bachelor.vju_vm_apla2.WireMockResponseList.*;
+import static com.bachelor.vju_vm_apla2.Wiremock.WireMockResponseList.*;
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.springframework.http.HttpStatus.*;
 

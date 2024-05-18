@@ -1,5 +1,3 @@
-package com.bachelor.vju_vm_apla2;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

@@ -14,4 +14,4 @@ WORKDIR vju
 COPY  src/main/resources/__files /vju/resources/__files
 COPY  --from=BUILD target/*.jar /vju/sif-vju-backend.jar
 
-ENTRYPOINT ["java", "-jar","-Dspring.profiles.active=local" ,"/vju/sif-vju-backend.jar"]
+ENTRYPOINT ["java", "-jar","/vju/sif-vju-backend.jar"]

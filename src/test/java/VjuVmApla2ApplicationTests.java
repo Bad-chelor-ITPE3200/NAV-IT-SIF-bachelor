@@ -1,4 +1,3 @@
-import com.bachelor.vju_vm_apla2.VjuLocalApplication;
 import no.nav.security.mock.oauth2.MockOAuth2Server;
 import no.nav.security.token.support.spring.test.EnableMockOAuth2Server;
 import org.junit.jupiter.api.Test;
@@ -20,8 +19,8 @@ class VjuVmApla2ApplicationTests {
     private String discoveryUrl;
     @Test
     public void serverStartsOnStaticPortAndIsUpdatedInEnv() {
-        Assertions.assertEquals(8082, server.baseUrl().port());
-        Assertions.assertThat(server.wellKnownUrl("test")).hasToString(discoveryUrl);
+        assertEquals(8082, server.baseUrl().port());
+        assertThat(server.wellKnownUrl("test")).hasToString(discoveryUrl);
     }
 
 }

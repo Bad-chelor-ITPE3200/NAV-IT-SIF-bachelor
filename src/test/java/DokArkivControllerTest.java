@@ -66,7 +66,7 @@ DokArkivController dokArkivController;
     Mockito.when(opprettNyeJournalposter_create.createJournalpost_Service(journalpost, headers )).thenReturn(ret);
 
     Mono<ResponseEntity<List<ResponeReturnFromDokArkiv_DTO>>>res = dokArkivController.createJournalpost_Controller(journalpost, headers);
-    Assert.assertEquals(ret.doOnSuccess(response1 -> logger.info("DokArkivController - createJournalpost() - Success - Response sent to client: {}", response1.getStatusCode())).toString(), res.toString());
+    assertEquals(ret.doOnSuccess(response1 -> logger.info("DokArkivController - createJournalpost() - Success - Response sent to client: {}", response1.getStatusCode())).toString(), res.toString());
 }
 @Test
     public void updateDokArkiv() {
@@ -87,7 +87,7 @@ DokArkivController dokArkivController;
    Mockito.when(oppdateringAvJournalposterUpdate.oppdaterMottattDato(jp, headers)).thenReturn(ret);
 
    Mono<ResponseEntity<Boolean>>res = dokArkivController.oppdaterJournalpost(jp2,headers);
-   Assert.assertEquals(ret.doOnSuccess(response1->logger.info("Response sent to client: {}", response1.getStatusCode())).toString(), res.toString());
+   assertEquals(ret.doOnSuccess(response1->logger.info("Response sent to client: {}", response1.getStatusCode())).toString(), res.toString());
 }
 
 @Test
@@ -102,7 +102,7 @@ DokArkivController dokArkivController;
 
      Mono<ResponseEntity<Boolean>> results = dokArkivController.feilregistrer_Controller("11", Journalposttype.U.toString(), headers);
 
-     Assert.assertEquals(OK.doOnSuccess(response1 -> logger.info("shalabim" + response1.getStatusCode())).toString(), results.toString());
+     assertEquals(OK.doOnSuccess(response1 -> logger.info("shalabim" + response1.getStatusCode())).toString(), results.toString());
 
 
 }
