@@ -11,7 +11,7 @@ LABEL authors="JAGO industries"
 
 
 #Can also be commended out for a real db
-COPY  src/main/resources/__files /resources/__files
-COPY  --from=BUILD target/*.jar /sif-vju-backend.jar
+COPY  src/main/resources/__files ./resources/__files
+COPY  --from=BUILD target/*.jar sif-vju-backend.jar
 
 ENTRYPOINT ["java", "-jar","/sif-vju-backend.jar"]
