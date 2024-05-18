@@ -1,15 +1,10 @@
-package com.bachelor.vju_vm_apla2;
-
 import com.bachelor.vju_vm_apla2.ErrorHandling.CustomClientException;
 import com.bachelor.vju_vm_apla2.Controller.DokArkivController;
 import com.bachelor.vju_vm_apla2.Models.DTO.DokArkiv.CreateJournalpost_DTO;
 import com.bachelor.vju_vm_apla2.Models.DTO.DokArkiv.ResponeReturnFromDokArkiv_DTO;
 import com.bachelor.vju_vm_apla2.Models.DTO.Request.PostOppdaterJournalpost_DTO;
-import com.bachelor.vju_vm_apla2.Models.POJO.Dokarkiv.Bruker;
-import com.bachelor.vju_vm_apla2.Models.POJO.Dokarkiv.CreateJournalpost;
 import com.bachelor.vju_vm_apla2.Models.POJO.Dokarkiv.Dokumenter;
 import com.bachelor.vju_vm_apla2.Models.POJO.Dokarkiv.Dokumentvariant;
-import com.bachelor.vju_vm_apla2.Models.POJO.Saf.BrukerIdType;
 import com.bachelor.vju_vm_apla2.Models.POJO.Saf.Journalposttype;
 import com.bachelor.vju_vm_apla2.Service.DokArkiv_Service.FeilRegistrer_DELETE;
 import com.bachelor.vju_vm_apla2.Service.DokArkiv_Service.OppdateringAvJournalposter_UPDATE;
@@ -71,7 +66,7 @@ DokArkivController dokArkivController;
     Mockito.when(opprettNyeJournalposter_create.createJournalpost_Service(journalpost, headers )).thenReturn(ret);
 
     Mono<ResponseEntity<List<ResponeReturnFromDokArkiv_DTO>>>res = dokArkivController.createJournalpost_Controller(journalpost, headers);
-    assertEquals(ret.doOnSuccess( response1 -> logger.info("DokArkivController - createJournalpost() - Success - Response sent to client: {}", response1.getStatusCode())).toString(), res.toString());
+    Assert.assertEquals(ret.doOnSuccess(response1 -> logger.info("DokArkivController - createJournalpost() - Success - Response sent to client: {}", response1.getStatusCode())).toString(), res.toString());
 }
 @Test
     public void updateDokArkiv() {
@@ -92,7 +87,7 @@ DokArkivController dokArkivController;
    Mockito.when(oppdateringAvJournalposterUpdate.oppdaterMottattDato(jp, headers)).thenReturn(ret);
 
    Mono<ResponseEntity<Boolean>>res = dokArkivController.oppdaterJournalpost(jp2,headers);
-   assertEquals(ret.doOnSuccess(response1->logger.info("Response sent to client: {}", response1.getStatusCode())).toString(), res.toString());
+   Assert.assertEquals(ret.doOnSuccess(response1->logger.info("Response sent to client: {}", response1.getStatusCode())).toString(), res.toString());
 }
 
 @Test
@@ -107,7 +102,7 @@ DokArkivController dokArkivController;
 
      Mono<ResponseEntity<Boolean>> results = dokArkivController.feilregistrer_Controller("11", Journalposttype.U.toString(), headers);
 
-     assertEquals(OK.doOnSuccess(response1 -> logger.info("shalabim" + response1.getStatusCode())).toString(), results.toString());
+     Assert.assertEquals(OK.doOnSuccess(response1 -> logger.info("shalabim" + response1.getStatusCode())).toString(), results.toString());
 
 
 }

@@ -1,5 +1,3 @@
-package com.bachelor.vju_vm_apla2;
-
 import com.bachelor.vju_vm_apla2.Controller.SafController;
 import com.bachelor.vju_vm_apla2.Models.DTO.Saf.ReturnFromGraphQl_DTO;
 import com.bachelor.vju_vm_apla2.Models.DTO.Request.PostJournalpostList_DTO;
@@ -88,10 +86,10 @@ public class SafControllerUnitTest {
         PostJournalpostList_DTO DTO = new PostJournalpostList_DTO(bk0, "2023-10-20", "2023-11-20",jpts, jptts, tt);
         headers.add("Authorization", "bearer");
         //trying without mocking anything as we will throw an exception
-        Mockito.when(safServiceMock.hentJournalpostListe(any(PostJournalpostList_DTO.class), any(HttpHeaders.class))).thenThrow(new Exception("generic cool exception"));
+        Mockito.when(safServiceMock.hentJournalpostListe(ArgumentMatchers.any(PostJournalpostList_DTO.class), ArgumentMatchers.any(HttpHeaders.class))).thenThrow(new Exception("generic cool exception"));
         String res = String.valueOf(safController.hentJournalpostListe(DTO, headers));
 
-        assertEquals(any(Exception.class), res);
+        Assert.assertEquals(ArgumentMatchers.any(Exception.class), res);
     }
 
     @Test
@@ -115,12 +113,12 @@ public class SafControllerUnitTest {
         Dokumentoversikt  dO = new Dokumentoversikt();
         ReturnFromGraphQl_DTO fgqlTest = new ReturnFromGraphQl_DTO(dO, "hello world");
         Mono <ReturnFromGraphQl_DTO> MfgglTest = Mono.just(Objects.requireNonNull(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).headers(headers).contentType(MediaType.APPLICATION_JSON).body(fgqlTest).getBody()));
-        Mockito.when(safServiceMock.hentJournalpostListe_Test_ENVIRONMENT(any(PostJournalpostList_DTO.class), any(HttpHeaders.class))).thenReturn(MfgglTest); //headers and stuff dont get sendt, thats why error is getting there
+        Mockito.when(safServiceMock.hentJournalpostListe_Test_ENVIRONMENT(ArgumentMatchers.any(PostJournalpostList_DTO.class), ArgumentMatchers.any(HttpHeaders.class))).thenReturn(MfgglTest); //headers and stuff dont get sendt, thats why error is getting there
 
 
         headers.add("Authorization", "Bearer ");
         String res = String.valueOf(safController.hentJournalpostListe(brukerId, headers));
-        assertEquals("MonoOnErrorResume",res );
+        Assert.assertEquals("MonoOnErrorResume",res );
     }
 
     @SneakyThrows
@@ -138,7 +136,7 @@ public class SafControllerUnitTest {
         String cmp = String.valueOf(Mono.just(ResponseEntity.status(HttpStatus.OK).headers(headers).contentType(MediaType.APPLICATION_PDF).header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"document.pdf\"").body(fakePDFresource)).block());
         String res = String.valueOf(safController.hentDokument(dokumentId, journalpostId, headers).block());
 
-        assertEquals(cmp, res);
+        Assert.assertEquals(cmp, res);
     }
 
 
